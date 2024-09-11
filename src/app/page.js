@@ -12,7 +12,7 @@ export default function Weather() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const apiKey = '4824d5536e6ca6a45fad0a3aaf0c13c9'; 
+        const apiKey = '4824d5536e6ca6a45fad0a3aaf0c13c9';
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -25,7 +25,7 @@ export default function Weather() {
         setLoading(false);
       } catch (error) {
         console.error('Error fetching weather data:', error);
-        setError('Failed to fetch weather data');
+        // setError('Failed to fetch weather data');
         setLoading(false);
       }
     };
@@ -51,6 +51,7 @@ export default function Weather() {
   return (
     <div className={styles.weatherContainer}>
       <h1>Weather API</h1>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -61,6 +62,7 @@ export default function Weather() {
         />
         <button type="submit" className={styles.submitButton}>Get Weather</button> {/* Apply CSS class */}
       </form>
+
       {weatherData && (
         <div>
           <p className={styles.weatherText}>Temperature: {weatherData.temp}°C</p> {/* Apply CSS class */}
