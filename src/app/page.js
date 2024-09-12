@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import styles from './Page.module.css'; // Make sure the path is correct
+import styles from './Page.module.css'; // Ensure this path is correct
 
 export default function Weather() {
   const [weatherData, setWeatherData] = useState(null);
@@ -9,35 +9,35 @@ export default function Weather() {
   const [error, setError] = useState(null);
   const [city, setCity] = useState('islamabad'); // Default city
 
-  useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const apiKey = '4824d5536e6ca6a45fad0a3aaf0c13c9'; 
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setWeatherData({
-          temp: data.main.temp,
-          conditions: data.weather[0].description,
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching weather data:', error);
-        setError('Failed to fetch weather data');
-        setLoading(false);
+  const fetchWeather = async () => {
+    try {
+      const apiKey = '4824d5536e6ca6a45fad0a3aaf0c13c9'; 
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
+      const data = await response.json();
+      setWeatherData({
+        temp: data.main.temp,
+        conditions: data.weather[0].description,
+      });
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+      setError('Failed to fetch weather data');
+      setLoading(false);
+    }
+  };
 
-    fetchWeather();
-  }, [city]); // Fetch weather when city changes
+  useEffect(() => {
+    fetchWeather(); // Fetch weather data when city changes
+  }, [city]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    fetchWeather();
+    fetchWeather(); // Call fetchWeather to update data
   };
 
   if (loading) {
