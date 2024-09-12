@@ -51,6 +51,7 @@ export default function Weather() {
   return (
     <div className={styles.weatherContainer}>
       <h1>Weather API</h1>
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -61,6 +62,7 @@ export default function Weather() {
         />
         <button type="submit" className={styles.submitButton}>Get Weather</button> {/* Apply CSS class */}
       </form>
+
       {weatherData && (
         <div>
           <p className={styles.weatherText}>Temperature: {weatherData.temp}°C</p> {/* Apply CSS class */}
